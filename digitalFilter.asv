@@ -1,6 +1,5 @@
 close all;
 clear all;
-clc;
 
 %coeff for the design in digital domain
 H0 = 0; %[dB]
@@ -85,8 +84,8 @@ a2_2 = sos(2,6)
 
 %write .txt with the values
 fileID = fopen('coeff.txt','w');
-formatSpec_a = 'a%d%d = %1.4f;';
-formatSpec_b = 'b%d%d = %1.4f;';
+formatSpec_a = 'a%d_%d = %1.4f;';
+formatSpec_b = 'b%d_%d = %1.4f;';
 [rows,col] = size(sos); %returns the number of rows and columns of sos
 
 for i=1:rows
@@ -95,10 +94,11 @@ for i=1:rows
         if j<4
             fprintf(fileID,formatSpec_b,j-1, i, sos(i, j));
         else
-            fprintf(fileID,formatSpec_a,j-4, i, sos(i, j));
+            fprintf(fileID,formatSpec_a,j-4, , sos(i, j));
         end
             fprintf(fileID, '\r\n');
     end
     fprintf(fileID, '\r\n');
 end
+
 fclose(fileID);
