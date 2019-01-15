@@ -1,0 +1,1 @@
+"./aic3204_init.obj" "./fix_point_iir_example_for_students.obj" "../VC5505.cmd" -llibc.a -lusbstk5505bsl.lib 
