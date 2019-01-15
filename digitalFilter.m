@@ -53,6 +53,8 @@ legend('analog filter','digital 1 filter', 'digital 2 filter')
 %--------------------------------------------------------------------------
 %get the 2 2nd order tf : from zpk to sos
 sos = zp2sos(z_d, p_d, k_d)
+
+%plot the frequency response
 [mag, freq] = freqz(sos, 100);
 figure
 plot(freq/pi,20*log10(abs(mag)))
@@ -62,7 +64,7 @@ ax.XTick = 0:.5:2;
 xlabel('Normalized Frequency (\times\pi rad/sample)')
 ylabel('Magnitude (dB)')
 
-%now extract the coeff for the first stage
+%get the coeff for the first stage
 b0_1 = sos(1,1)
 b1_1 = sos(1,2)
 b2_1 = sos(1,3)
@@ -70,13 +72,22 @@ a0_1 = sos(1,4)
 a1_1 = sos(1,5)
 a2_1 = sos(1,6)
 
-%now extract the coeff for the first stage
+%get the coeff for the first stage
 b0_2 = sos(2,1)
 b1_2 = sos(2,2)
 b2_2 = sos(2,3)
 a0_2 = sos(2,4)
 a1_2 = sos(2,5)
 a2_2 = sos(2,6)
+
+%write .txt with the values
+x = 0:.1:1;
+A = [x; exp(x)];
+
+fileID = fopen('coeff.txt','w');
+fprintf(fileID,'%6s %12s\n','x','exp(x)');
+fprintf(fileID,'%6.2f %12.8f\n',A);
+fclose(fileID);
 
 
 

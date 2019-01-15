@@ -18,7 +18,7 @@ d2 = 1;
 Den = [d0, d1, d2];
 
 %continuous tf
-filter_tf = tf(Num, Den) 
+filter_a_tf = tf(Num, Den) 
 
 %sampling frequency
 fs = 10*fc;
@@ -53,7 +53,7 @@ filter_d2_tf = zpk(zd2, pd2, kd2, Ts)
 
 %---------------------------------------------------------------------------------------
 %plot zero and pole with exact transformation
-%{
+
 zplane(zd1, pd1)
 grid
 title('Z-plane with exact transformation')
@@ -74,7 +74,7 @@ bode(filter_d2_tf)
 
 %plot the continuous transfert function
 hold on
-bode(filter_tf)
+bode(filter_a_tf)
 legend('Bode with exact transformation', 'Bode with bilinear approximation', 'Bode of the continuous tf')
 
 %------------------------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ legend('Bode with exact transformation', 'Bode with bilinear approximation', 'Bo
 %step
 figure
 subplot(1,3,1)
-step(filter_tf)
+step(filter_a_tf)
 xlabel('time')
 ylabel('output')
 legend('analog tf')
@@ -96,16 +96,39 @@ step(filter_d2_tf)
 xlabel('time')
 ylabel('output')
 legend('bilinear approximation tf')
-%}
+
 
 %sin 100Hz
-N=0.004
+N=0.02
 t = 0:Ts:N;
 wt1 = 100 * 2 * pi; %rad/sec
 wt2 = 2e3 * 2 * pi; %rad/sec
 sig_sin_ft1 = sin(wt1 * t)
 sig_sin_ft2 = sin(wt2 * t)
+
+%simulate the digital tf constructed with the bilinear approximation
 figure
 lsim(filter_d2_tf, sig_sin_ft2, t)
 title('digital tf (bilinear approx.) : sinus at 2kHz');
 
+figure 
+lsim(filter_d2_tf, sig_sin_ft1, t)
+title('digital tf (bilinear approx.) : sinus at 100Hz');
+
+%simulate the digital tf constructed with the exact transformation
+figure
+lsim(filter_d1_tf, sig_sin_ft2, t)
+title('digital tf (exact trans.) : sinus at 2kHz');
+
+figure 
+lsim(filter_d1_tf, sig_sin_ft1, t)
+title('digital tf (exact trans.) : sinus at 100Hz');
+
+%simulate the analog tf
+figure
+lsim(filter_a_tf, sig_sin_ft2, t)
+title('digital tf (exact trans.) : sinus at 2kHz');
+
+figure 
+lsim(filter_a_tf, sig_sin_ft1, t)
+title('digital tf (exact trans.) : sinus at 100Hz');
