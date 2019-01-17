@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccsv8/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := C:/ti/C5500 Code Generation Tools 4.4.1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -142,14 +142,14 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 iir_filters_for_students.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccsv8/tools/compiler/c5500_4.4.1/bin/cl55" -v5505 --memory_model=large -g --define=vc5505 --display_error_number --diag_warning=225 --ptrdiff_size=16 -z -m"iir_filters_for_students.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccsv8/tools/compiler/c5500_4.4.1/lib" -i"C:/Temp/Test/C5505_CCS8/lib" -i"C:/ti/ccsv8/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="iir_filters_for_students_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "iir_filters_for_students.out" $(ORDERED_OBJS)
+	"C:/ti/C5500 Code Generation Tools 4.4.1/bin/cl55" -v5505 --memory_model=large -g --define=vc5505 --display_error_number --diag_warning=225 --ptrdiff_size=16 -z -m"iir_filters_for_students.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/C5500 Code Generation Tools 4.4.1/lib" -i"C:/Users/gilles.mottiez/Desktop/C5505_CCS8/lib" -i"C:/ti/C5500 Code Generation Tools 4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="iir_filters_for_students_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "iir_filters_for_students.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
 iir_filters_for_students.hex: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: C5500 Hex Utility'
-	"C:/ti/ccsv8/tools/compiler/c5500_4.4.1/bin/hex55"  -o "iir_filters_for_students.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/C5500 Code Generation Tools 4.4.1/bin/hex55"  -o "iir_filters_for_students.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 

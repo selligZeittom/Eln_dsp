@@ -2,7 +2,10 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-USER_OBJS :=
+SHELL = cmd.exe
 
-LIBS :=
+# Add inputs and outputs from these tool invocations to the build variables 
+LIB_SRCS += \
+../usbstk5505bsl.lib 
+
 
