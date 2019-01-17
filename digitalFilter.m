@@ -93,9 +93,9 @@ for i=1:rows
     fprintf(fileID, '/* stage n%d */\r\n', i);
     for j=1:col
         if j<4
-            fprintf(fileID,formatSpec_b,j-1, i, sos(i, j)*power(2, 14));
+            fprintf(fileID,formatSpec_b,j-1, i, (sos(i, j) * power(2, 14)));
         else
-            fprintf(fileID,formatSpec_a,j-4, i, sos(i, j)*power(2, 14));
+            fprintf(fileID,formatSpec_a,j-4, i, (sos(i, j) * power(2, 14)));
         end
             fprintf(fileID, '\r\n');
     end
