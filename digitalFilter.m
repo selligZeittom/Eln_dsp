@@ -84,18 +84,18 @@ a2_2 = sos(2,6)
 
 
 %write .txt with the values
-fileID = fopen('coeff.txt','w');
-formatSpec_a = 'a%d%d = %1.4f;';
-formatSpec_b = 'b%d%d = %1.4f;';
+fileID = fopen('coefficients.c','w');
+formatSpec_a = 'uint8_t a%d%d = %1.0f;';
+formatSpec_b = 'uint8_t b%d%d = %1.0f;';
 [rows,col] = size(sos); %returns the number of rows and columns of sos
 
 for i=1:rows
     fprintf(fileID, '/* stage n%d */\r\n', i);
     for j=1:col
         if j<4
-            fprintf(fileID,formatSpec_b,j-1, i, sos(i, j));
+            fprintf(fileID,formatSpec_b,j-1, i, sos(i, j)*power(2, 14));
         else
-            fprintf(fileID,formatSpec_a,j-4, i, sos(i, j));
+            fprintf(fileID,formatSpec_a,j-4, i, sos(i, j)*power(2, 14));
         end
             fprintf(fileID, '\r\n');
     end
